@@ -1,0 +1,16 @@
+w5500 tcp-server по SPI+DMA на stm32f401re-nucleo с записью на NAND K9F1G08U0D. Отладка USART+DMA
+USART2_TX      PA2
+USART2_RX      PA3
+SPI2_MISO      PC2
+SPI2_MOSI      PC3
+SPI2_SCK       PB10
+W5500_RST      PC7
+W5500_CS       PC6
+D0-D7          PB0-PB7
+GPIO_EXIT13    PC13
+FLASH_CE       PA10
+FLASH_WE       PA9
+FLASH_RE       PA8
+FLASH_CLE      PA5
+FLASH_ALE      PA6
+FLASH_RB       PA7
