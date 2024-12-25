@@ -1,0 +1,11 @@
+../Core/Src/tcp.c:28:6:UARTPrint	1
+../Core/Src/tcp.c:37:6:wizchip_select	1
+../Core/Src/tcp.c:42:6:wizchip_deselect	1
+../Core/Src/tcp.c:47:6:wizchip_reset	1
+../Core/Src/tcp.c:54:6:wizchip_writebyte	2
+../Core/Src/tcp.c:61:9:wizchip_readbyte	2
+../Core/Src/tcp.c:70:6:wizchip_readburst	2
+../Core/Src/tcp.c:76:6:wizchip_writeburst	2
+../Core/Src/tcp.c:82:6:tcp_server_init	6
+../Core/Src/tcp.c:98:6:tcp_send	4
+../Core/Src/tcp.c:114:6:w5500_init	1
