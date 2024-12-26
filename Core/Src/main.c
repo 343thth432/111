@@ -30,13 +30,13 @@ volatile bool uartTxComplete = false;
 #define START_PAGE_READ 0
 uint32_t current_page = START_PAGE;
 uint32_t current_read_page = START_PAGE_READ;
-#define BUFFER_SIZE 16384
+#define BUFFER_SIZE 16384                                           // для W5500 макс. размер буффера для передачи данных 16кб в одну сторону
 uint8_t write_buffer[BUFFER_SIZE];
 uint8_t read_buffer[BUFFER_SIZE];
-#define PAGE_SIZE               2048
-#define PAGES_PER_BLOCK         64
-#define TOTAL_BLOCKS            4
-#define TOTAL_PAGES             (TOTAL_BLOCKS * PAGES_PER_BLOCK)
+#define PAGE_SIZE               2048                                // макс размер страницы 2кб
+#define PAGES_PER_BLOCK         64                                  // в блоке 64 страницы
+#define TOTAL_BLOCKS            1024                                // максимальное количество блоков в Nand K9F1G08U0D
+#define TOTAL_PAGES             (TOTAL_BLOCKS * PAGES_PER_BLOCK)    // общее количество страниц
 #define WRITE_BUFFER_SIZE       PAGE_SIZE
 #define READ_BUFFER_SIZE        PAGE_SIZE
 
@@ -61,30 +61,31 @@ DMA_HandleTypeDef hdma_usart2_tx;
 
 DMA_HandleTypeDef hdma_memtomem_dma2_stream0;
 /* USER CODE BEGIN PV */
+// завершение передачи данных по spi dma
 void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi){
     if (hspi == &hspi2) {
         spi_dma_completed = true;
     }
 }
-
+// Сигнал о нажатии кнопки для прерывания работы цикла отправки и записи данных
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
     if(GPIO_Pin == GPIO_PIN_13){
         button_pressed_flag = 1;
     }
 }
-
+// Завершение передачи по usart dma
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
     if (huart->Instance == USART2){
         uartTxComplete = true;
     }
 }
-
+// Отладка по usart
 void UART_SendString(char* str){
 	uartTxComplete = false;
 	HAL_UART_Transmit_DMA(&huart2, (uint8_t*)str, strlen(str));
 	while (!uartTxComplete);
 }
-
+// Вывод HEX данных
 void UART_SendDataHex(uint8_t* data, uint32_t length){
     char buffer[256];
     for(uint32_t i = 0; i < length; i++){
@@ -95,20 +96,20 @@ void UART_SendDataHex(uint8_t* data, uint32_t length){
     }
     UART_SendString("\r\n");
 }
-
+// Вывод статуса Nand памяти (не исп.)
 uint8_t NAND_ReadStatus() {
     uint8_t status = 0;
     NAND_SendCommand(0x70);
     status = NAND_ReadData();
     return status;
 }
-
+// Вывод номера страницы/блока и т д
 void UART_SendNumber(uint32_t number) {
     char num_str[12];
     snprintf(num_str, sizeof(num_str), "%lu\r\n", number);
     UART_SendString(num_str);
 }
-
+// Ожидание готовности Nand флеш-памяти
 int NAND_WaitReady(void) {
     const uint32_t timeout = 1;
     uint32_t start = HAL_GetTick();
@@ -119,92 +120,92 @@ int NAND_WaitReady(void) {
     }
     return 0;
 }
-
+// Отправка команды в Nand флеш-память
 void NAND_SendCommand(uint8_t command){
-    FLASH_CLE_GPIO_Port->BSRR = FLASH_CLE_Pin;
-    FLASH_ALE_GPIO_Port->BSRR = (uint32_t)FLASH_ALE_Pin << 16U;
-    GPIOB->ODR = command;
-    FLASH_WE_GPIO_Port->BSRR = (uint32_t)FLASH_WE_Pin << 16U;      // Сбросить WE (RESET - начало импульса WE)
-    FLASH_WE_GPIO_Port->BSRR = FLASH_WE_Pin;                       // Установить WE (SET - конец импульса WE)
-    FLASH_CLE_GPIO_Port->BSRR = (uint32_t)FLASH_CLE_Pin << 16U;    // Сбросить CLE (RESET)
+    FLASH_CLE_GPIO_Port->BSRR = FLASH_CLE_Pin;                          // Установить CLE (SET)
+    FLASH_ALE_GPIO_Port->BSRR = (uint32_t)FLASH_ALE_Pin << 16U;         // Сбросить ALE (RESET)
+    GPIOB->ODR = command;                                               // Записывает командный байт 
+    FLASH_WE_GPIO_Port->BSRR = (uint32_t)FLASH_WE_Pin << 16U;           // Сбросить WE (RESET - начало импульса WE)
+    FLASH_WE_GPIO_Port->BSRR = FLASH_WE_Pin;                            // Установить WE (SET - конец импульса WE)
+    FLASH_CLE_GPIO_Port->BSRR = (uint32_t)FLASH_CLE_Pin << 16U;         // Сбросить CLE (RESET)
 }
-
+// Отправка адреса в NAND флеш-память
 void NAND_SendAddress(uint8_t address){
-    FLASH_ALE_GPIO_Port->BSRR = FLASH_ALE_Pin;                      // Установить ALE (SET)
-    FLASH_CLE_GPIO_Port->BSRR = (uint32_t)FLASH_CLE_Pin << 16U;     // Сбросить CLE (RESET)
-    GPIOB->ODR = address;
-    FLASH_WE_GPIO_Port->BSRR = (uint32_t)FLASH_WE_Pin << 16U;       // Сбросить WE (RESET - начало импульса WE)
-    FLASH_WE_GPIO_Port->BSRR = FLASH_WE_Pin;                        // Установить WE (SET - конец импульса WE)
-    FLASH_ALE_GPIO_Port->BSRR = (uint32_t)FLASH_ALE_Pin << 16U;     // Сбросить ALE (RESET)
+    FLASH_ALE_GPIO_Port->BSRR = FLASH_ALE_Pin;                          // Установить ALE (SET)
+    FLASH_CLE_GPIO_Port->BSRR = (uint32_t)FLASH_CLE_Pin << 16U;         // Сбросить CLE (RESET)
+    GPIOB->ODR = address;                                               // Записывает адресный байт
+    FLASH_WE_GPIO_Port->BSRR = (uint32_t)FLASH_WE_Pin << 16U;           // Сбросить WE (RESET - начало импульса WE)
+    FLASH_WE_GPIO_Port->BSRR = FLASH_WE_Pin;                            // Установить WE (SET - конец импульса WE)
+    FLASH_ALE_GPIO_Port->BSRR = (uint32_t)FLASH_ALE_Pin << 16U;         // Сбросить ALE (RESET)
 }
-
+// Запись данных в NAND флеш-память
 void NAND_WriteData(uint8_t data){
-    FLASH_CLE_GPIO_Port->BSRR = (uint32_t)FLASH_CLE_Pin << 16U;     // Сбросить CLE (RESET)
-    FLASH_ALE_GPIO_Port->BSRR = (uint32_t)FLASH_ALE_Pin << 16U;     // Сбросить ALE (RESET)
-    GPIOB->MODER &= ~0x0000FFFF;
-    GPIOB->MODER |= 0x00005555;
-    GPIOB->ODR = (GPIOB->ODR & ~0xFF) | (data & 0xFF);
-    FLASH_WE_GPIO_Port->BSRR = (uint32_t)FLASH_WE_Pin << 16U;       // Сбросить WE (RESET)
-    FLASH_WE_GPIO_Port->BSRR = FLASH_WE_Pin;                        // Установить WE (SET)
+    FLASH_CLE_GPIO_Port->BSRR = (uint32_t)FLASH_CLE_Pin << 16U;         // Сбросить CLE (RESET)
+    FLASH_ALE_GPIO_Port->BSRR = (uint32_t)FLASH_ALE_Pin << 16U;         // Сбросить ALE (RESET)
+    GPIOB->MODER &= ~0x0000FFFF;                                        // Сбрасывает биты модерации 0-7
+    GPIOB->MODER |= 0x00005555;                                         // Устанавливает режим пинов 0-7 как вход
+    GPIOB->ODR = (GPIOB->ODR & ~0xFF) | (data & 0xFF);                  // Очищает младшие биты регистра и устанавливает значения data
+    FLASH_WE_GPIO_Port->BSRR = (uint32_t)FLASH_WE_Pin << 16U;           // Сбросить WE (RESET)
+    FLASH_WE_GPIO_Port->BSRR = FLASH_WE_Pin;                            // Установить WE (SET)
 }
-
+// Чтение одного байта данных из Nand флеш-памяти
 uint8_t NAND_ReadData(void) {
     uint8_t data;
-    GPIOB->MODER &= ~0x0000FFFF;
-    GPIOB->MODER |= 0x00004444;
-    FLASH_RE_GPIO_Port->BSRR = (uint32_t)FLASH_RE_Pin << 16U;
-    data = (uint8_t)(GPIOB->IDR & 0xFF);
-    FLASH_RE_GPIO_Port->BSRR = FLASH_RE_Pin; // SET RE
-    GPIOB->MODER &= ~0x0000FFFF;
-    GPIOB->MODER |= 0x00005555;
+    GPIOB->MODER &= ~0x0000FFFF;                                        // сброс битов 0-7
+    GPIOB->MODER |= 0x00004444;                                         // Устанавливает режим пинов 0-7 как вход
+    FLASH_RE_GPIO_Port->BSRR = (uint32_t)FLASH_RE_Pin << 16U;           // Сбрасывает пин RE (активирует сигнал чтения)
+    data = (uint8_t)(GPIOB->IDR & 0xFF);                                // Считывает младшие 8 бит из (IDR) и сохраняет их в data.
+    FLASH_RE_GPIO_Port->BSRR = FLASH_RE_Pin;                            // Устанавливает пин RE (деактивирует сигнал чтения)
+    GPIOB->MODER &= ~0x0000FFFF;                                        // сброс битов 0-7
+    GPIOB->MODER |= 0x00005555;                                         // обратно на вывод
     return data;
 }
-
+// Стирание блока в NAND флеш-памяти
 void NAND_EraseBlock(uint32_t block) {
     char debug_msg[50];
-    NAND_SendCommand(0x60);
-    uint32_t page_address = block * PAGES_PER_BLOCK;
+    NAND_SendCommand(0x60);                                             // команда начала очистки блока
+    uint32_t page_address = block * PAGES_PER_BLOCK;                    // начальный адрес страницы
+    NAND_SendAddress((uint8_t)(0x00));                                  // отправка первых двух байтов столбца(дважды)    
     NAND_SendAddress((uint8_t)(0x00));
-    NAND_SendAddress((uint8_t)(0x00));
-    NAND_SendAddress((uint8_t)(page_address & 0xFF));
-    NAND_SendAddress((uint8_t)((page_address >> 8) & 0xFF));
-    NAND_SendAddress((uint8_t)((page_address >> 16) & 0xFF));
-    NAND_SendCommand(0xD0);
+    NAND_SendAddress((uint8_t)(page_address & 0xFF));                   // Страница (байт 0)
+    NAND_SendAddress((uint8_t)((page_address >> 8) & 0xFF));            // Страница (байт 1)
+    NAND_SendAddress((uint8_t)((page_address >> 16) & 0xFF));           // Страница (байт 2)
+    NAND_SendCommand(0xD0);                                             // команда завершения очистки блока
     snprintf(debug_msg, "Block %lu erased successfully\r\n", block);
     //UART_SendString(debug_msg);
 }
-
+// Запись данных в конкретную страницу NAND флеш-памяти
 void NAND_WritePage(uint32_t page, uint32_t column, uint8_t* data) {
-    NAND_SendCommand(0x80);
-    NAND_SendAddress((uint8_t)(column & 0xFF));             // Колонка (низкий байт)
-    NAND_SendAddress((uint8_t)((column >> 8) & 0xFF));      // Колонка (высокий байт)
-    NAND_SendAddress((uint8_t)(page & 0xFF));               // Страница (байт 0)
-    NAND_SendAddress((uint8_t)((page >> 8) & 0xFF));        // Страница (байт 1)
-    NAND_SendAddress((uint8_t)((page >> 16) & 0xFF));       // Страница (байт 2)
-    for (int i = 0; i < PAGE_SIZE; i++) {
+    NAND_SendCommand(0x80);                                             // команда начала записи
+    NAND_SendAddress((uint8_t)(column & 0xFF));                         // Колонка (низкий байт)
+    NAND_SendAddress((uint8_t)((column >> 8) & 0xFF));                  // Колонка (высокий байт)
+    NAND_SendAddress((uint8_t)(page & 0xFF));                           // Страница (байт 0)
+    NAND_SendAddress((uint8_t)((page >> 8) & 0xFF));                    // Страница (байт 1)
+    NAND_SendAddress((uint8_t)((page >> 16) & 0xFF));                   // Страница (байт 2)
+    for (int i = 0; i < PAGE_SIZE; i++) {                               // Запись данных в страницу
         NAND_WriteData(data[i]);
     }
-    HAL_GPIO_WritePin(FLASH_WE_GPIO_Port, FLASH_WE_Pin, GPIO_PIN_RESET);
-    NAND_SendCommand(0x10);
-    if (NAND_WaitReady() != 0) {
+    HAL_GPIO_WritePin(FLASH_WE_GPIO_Port, FLASH_WE_Pin, GPIO_PIN_RESET);// Активирует сигнал WE
+    NAND_SendCommand(0x10);                                             // команада завершения записи
+    if (NAND_WaitReady() != 0) {                                        // ожидание готовновсти
         UART_SendString("Write Operation Timeout\r\n");
     }
 }
-
+// Чтение данных из конкретной страницы NAND флеш-памяти
 void NAND_ReadPage(uint32_t page, uint32_t column, uint8_t* buffer) {
-    NAND_SendCommand(0x00);
-    NAND_SendAddress((uint8_t)(column & 0xFF));             // Колонка (низкий байт)
-    NAND_SendAddress((uint8_t)((column >> 8) & 0xFF));      // Колонка (высокий байт)
-    NAND_SendAddress((uint8_t)(page >> 16 & 0xFF));         // Страница (байт 0)
-    NAND_SendAddress((uint8_t)((page >> 8) & 0xFF));        // Страница (байт 1)
-    NAND_SendAddress((uint8_t)((page >> 16) & 0xFF));       // Страница (байт 2)
-    NAND_SendCommand(0x30);
-    if (NAND_WaitReady() != 0){
+    NAND_SendCommand(0x00);                                             // команда начала чтения
+    NAND_SendAddress((uint8_t)(column & 0xFF));                         // Колонка (низкий байт)
+    NAND_SendAddress((uint8_t)((column >> 8) & 0xFF));                  // Колонка (высокий байт)
+    NAND_SendAddress((uint8_t)((page >> 0) & 0xFF));                    // Страница (байт 0)
+    NAND_SendAddress((uint8_t)((page >> 8) & 0xFF));                    // Страница (байт 1)
+    NAND_SendAddress((uint8_t)((page >> 16) & 0xFF));                   // Страница (байт 2)
+    NAND_SendCommand(0x30);                                             // команда завешения чтения 
+    if (NAND_WaitReady() != 0){                                         // ожидание готовновсти
         UART_SendString("Read Operation Timeout\r\n");
         return;
     }
 }
-
+// Чтение всех страниц NAND флеш-памяти и вывод данных по UART для отладки
 void ReadAllPages(){
 	uint32_t page_count = 0;
 	uint32_t total_pages = TOTAL_BLOCKS * PAGES_PER_BLOCK;
@@ -212,13 +213,13 @@ void ReadAllPages(){
 	UART_SendString("Total pages: ");
 	UART_SendNumber(total_pages);
 	UART_SendString("\r\n");
-    for(uint32_t block = 0; block < TOTAL_BLOCKS; block++){
-    	for(uint32_t page_in_block = 0; page_in_block < PAGES_PER_BLOCK; page_in_block++){
-    		current_page = block * PAGES_PER_BLOCK + page_in_block;
-    		for(uint32_t i = 0; i < READ_BUFFER_SIZE; i++) {
+    for(uint32_t block = 0; block < TOTAL_BLOCKS; block++){             // Итерация по каждому блоку
+    	for(uint32_t page_in_block = 0; page_in_block < PAGES_PER_BLOCK; page_in_block++){ // Итерация по каждой странице внутри текущего блока
+    		current_page = block * PAGES_PER_BLOCK + page_in_block;     // Вычисляет номер текущей страницы
+    		for(uint32_t i = 0; i < READ_BUFFER_SIZE; i++) {            // Заполняет буфер
     			read_buffer[i] = (uint8_t)((current_page + i) & 0xFF);
     		}
-    		NAND_ReadPage(current_page, 0, read_buffer);
+    		NAND_ReadPage(current_page, 0, read_buffer);                // чтение страницы
     		page_count++;
             UART_SendString("Page ");
             UART_SendNumber(page_count);
@@ -227,34 +228,34 @@ void ReadAllPages(){
     	}
     }
 }
-
+// Сетевая информация
 wiz_NetInfo netInfo = {.mac = {0x00, 0x08, 0xdc, 0xab, 0xcd, 0xef},
                        .ip = {192, 168, 1, 218},
                        .sn = {255, 255, 255, 0},
                        .gw = {192, 168, 1, 1},
                        .dns = {0, 0, 0, 0},
                        .dhcp = NETINFO_STATIC };
-
+// Активация чипа W5500 
 void wizchip_select(void){
 	(W5500_CS_GPIO_Port->BSRR = (uint32_t)W5500_CS_Pin << 16U);
 }
-
+// Деактивация чипа W5500
 void wizchip_deselect(void){
 	(W5500_CS_GPIO_Port->BSRR = W5500_CS_Pin);
 }
-
+// Сброс Ethernet-контроллера W5500
 void wizchip_reset(void){
 	(W5500_RST_GPIO_Port->BSRR = (uint32_t)W5500_RST_Pin << 16U);
 	(W5500_RST_GPIO_Port->BSRR = W5500_RST_Pin);
 }
-
+// Отправка одного байта данных на W5500 по SPI
 void wizchip_writebyte(uint8_t wb){
     uint8_t rb;
     spi_dma_completed = false;
-    HAL_SPI_TransmitReceive_DMA(&hspi2, &wb, &rb, 1);
-    while (!spi_dma_completed);
+    HAL_SPI_TransmitReceive_DMA(&hspi2, &wb, &rb, 1);                   // передача данных по spi dma
+    while (!spi_dma_completed);                                         // ожидание завершения передачи/приёма данных
 }
-
+// Чтение одного байта данных с W5500 по SPI
 uint8_t wizchip_readbyte(void){
     uint8_t rb = 0;
     uint8_t wb = 0xFF;
@@ -263,62 +264,62 @@ uint8_t wizchip_readbyte(void){
     while (!spi_dma_completed);
     return rb;
 }
-
+// Чтение серии байтов данных с W5500 по SPI
 void wizchip_readburst(uint8_t* pBuf, uint16_t len){
     spi_dma_completed = false;
     HAL_SPI_TransmitReceive_DMA(&hspi2, spi_tx_buf, pBuf, len);
     while (!spi_dma_completed);
 }
-
+// Запись серии байтов данных на W5500 по SPI
 void wizchip_writeburst(uint8_t* pBuf, uint16_t len){
     spi_dma_completed = false;
     HAL_SPI_TransmitReceive_DMA(&hspi2, pBuf, spi_rx_buf, len);
     while (!spi_dma_completed);
 }
-
+// Инициализация TCP сервера
 void tcp_server_init() {
-    if(stat = socket(0, Sn_MR_TCP, 5000, 0) == 0)
+    if(stat = socket(0, Sn_MR_TCP, 5000, 0) == 0)                       // открытие сокета 0
     	UART_SendString("Socket init success\r\n");
-    if(stat = getSn_SR(0)== SOCK_INIT)
+    if(stat = getSn_SR(0)== SOCK_INIT)                                  // проверка статуса сокета
     	UART_SendString("Socket open success\r\n");
-    if(stat = listen(0) == SOCK_OK)
+    if(stat = listen(0) == SOCK_OK)                                     // прослушивание сокета
     	UART_SendString("Listen socket success\r\n");
-    while(getSn_SR(0) == SOCK_LISTEN)
+    while(getSn_SR(0) == SOCK_LISTEN)                                   // ожидание установления соединения в беск. цикле
         {
     			HAL_Delay(0);
         }
-    if(getSn_SR(0) == SOCK_ESTABLISHED){
+    if(getSn_SR(0) == SOCK_ESTABLISHED){                                // проверка установления соединения
     	UART_SendString("Input connection\r\n");
     }
 }
-
+// Отправка данных по установленному TCP-соединению, запись данных в NAND Flash, их верификация
 void tcp_send(){
     uint32_t current_page = 0;
     uint32_t success_count = 0;
     static uint8_t initialized = 0;
-    if(!initialized){
+    if(!initialized){                                                   // однократная инициализация заполения буффера
     	for(uint32_t i = 0; i < WRITE_BUFFER_SIZE; i++) {
     		write_buffer[i] = (uint8_t)(i & 0xFF);
     	}
     	initialized = 1;
     }
-    if (getSn_SR(0) == SOCK_ESTABLISHED) {
-    	while (BUFFER_SIZE > 0) {
-    		if(button_pressed_flag){
-    			button_pressed_flag = 0;
+    if (getSn_SR(0) == SOCK_ESTABLISHED) {                              // проверка соединения 
+    	while (BUFFER_SIZE > 0) {                                       // бесконечный цикл 
+    		if(button_pressed_flag){                                    // обработка нажатия кнопки
+    			button_pressed_flag = 0;                                // если есть нажатие вызывается функция полного считывания из Nand        
     			ReadAllPages();
     			return;
     		}
-        	int32_t nbytes = send(0, write_buffer, BUFFER_SIZE);
+        	int32_t nbytes = send(0, write_buffer, BUFFER_SIZE);        // функция отправки данных клиенту
         	if (nbytes > 0) {
         		//UART_SendString("Sending data and writing to NAND...\r\n");
-        		if (current_page >= TOTAL_PAGES) {
+        		if (current_page >= TOTAL_PAGES) {                      // проверка не достигнута ли макс. страница 
         			UART_SendString("NAND Flash is full.\r\n");
         		    break;
         		}
                 uint32_t block = current_page / PAGES_PER_BLOCK;
                 uint32_t page_in_block = current_page % PAGES_PER_BLOCK;
-                if (page_in_block == 0) {
+                if (page_in_block == 0) {                               // определяется блок и первая страница внутри блока после чего стирается
                     UART_SendString("Erasing Block ");
                     UART_SendNumber(block);
                     //UART_SendString("...\r\n");
@@ -327,7 +328,7 @@ void tcp_send(){
                 for(uint32_t i = 0; i < WRITE_BUFFER_SIZE; i++) {
                 	write_buffer[i] = (uint8_t)((current_page + i) & 0xFF);
                 }
-                NAND_WritePage(current_page, 0, write_buffer);
+                NAND_WritePage(current_page, 0, write_buffer);          // запись данных в страницу
             	//UART_SendNumber(block);
                 //UART_SendString("\r\n");
                 //UART_SendString("Written Data: \n");
@@ -335,10 +336,10 @@ void tcp_send(){
                 for(uint32_t i = 0; i < READ_BUFFER_SIZE; i++) {
                 	read_buffer[i] = (uint8_t)((current_page + i) & 0xFF);
                 }
-                NAND_ReadPage(current_page, 0, read_buffer);
+                NAND_ReadPage(current_page, 0, read_buffer);            // чтение данных со страницы
                 //UART_SendString("Read Data: \n");
                 //UART_SendDataHex(read_buffer, READ_BUFFER_SIZE);
-                if(memcmp(write_buffer, read_buffer, WRITE_BUFFER_SIZE) != 0) {
+                if(memcmp(write_buffer, read_buffer, WRITE_BUFFER_SIZE) != 0) { // верификация данных 
                 	UART_SendString("Data verification FAILED at page ");
                     UART_SendNumber(current_page);
                     UART_SendString("\r\n");
@@ -368,16 +369,16 @@ void tcp_send(){
         UART_SendString("Socket not established.\r\n");
     }
 }
-
+// Инициализация Ethernet-контроллера W5500
 void w5500_init() {
-  wizchip_reset();
-  reg_wizchip_cs_cbfunc(wizchip_select, wizchip_deselect);
+  wizchip_reset();                                                          // Сброс чипа W5500
+  reg_wizchip_cs_cbfunc(wizchip_select, wizchip_deselect);                  // Регистрация функций обратного вызова
   reg_wizchip_spi_cbfunc(wizchip_readbyte, wizchip_writebyte);
   reg_wizchip_spiburst_cbfunc(wizchip_readburst, wizchip_writeburst);
-  uint8_t memsize[2][8] = {{16,0,0,0,0,0,0,0},{16,0,0,0,0,0,0,0}};
-  wizchip_init(memsize, memsize);
-  wizchip_setnetinfo(&netInfo);
-  ctlnetwork(CN_SET_NETINFO, (void*) &netInfo);
+  uint8_t memsize[2][8] = {{16,0,0,0,0,0,0,0},{16,0,0,0,0,0,0,0}};          // 32кб на сокет 0 для передачи(16кб) и приема(16кб) данных
+  wizchip_init(memsize, memsize);                                           // Инициализация размеров буферов
+  wizchip_setnetinfo(&netInfo);                                             // Установка сетевой информации
+  ctlnetwork(CN_SET_NETINFO, (void*) &netInfo);                             // Управление сетевой информацией
   HAL_Delay(10);
 }
 
@@ -441,11 +442,6 @@ int main(void)
 	w5500_init();
 	tcp_server_init();
 	tcp_send();
-	while(!button_pressed_flag){
-		HAL_Delay(1);
-	}
-	button_pressed_flag = 0;
-	ReadAllPages();
 	HAL_Delay(100);
     /* USER CODE END WHILE */
 
