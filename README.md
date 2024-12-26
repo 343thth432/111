@@ -10,7 +10,7 @@ W5500 TCPS SPI+DMA STM32F401RE-NUCLEO NAND K9F1G08U0D.
   SPI2_SCK       PB10
   W5500_RST      PC7
   W5500_CS       PC6
-  5V             CN6-5(5V)
+  5V             CN7-16(3V3)
   GND            CN7-19(GND)
 (K9F1G08U0D) NandFlash Board (A):
   D0-D7          PB0-PB7
