@@ -65,3 +65,4 @@ W5500 TCPS SPI+DMA STM32F401RE-NUCLEO NAND K9F1G08U0D.
       Stop Bits               1
       Data Direction          Receive and Transmit
       Over Sampling           16 Samples
+Используя связку stm32 + NandFlash + W5500 для модуля W5500 может потребоваться доп. питание. 
