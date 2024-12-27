@@ -14,57 +14,58 @@ SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84
  - W5500_CS       PC6  
  - 5V             CN7-16(3V3)  
  - GND            CN7-19(GND)  
-(K9F1G08U0D) NandFlash Board (A):  
-  D0-D7          PB0-PB7  
-  FLASH_CE       PA10  
-  FLASH_WE       PA9  
-  FLASH_RE       PA8  
-  FLASH_CLE      PA5  
-  FLASH_ALE      PA6  
-  FLASH_RB       PA7  
-  WP             CN6-4(3V3)  
-  GND            CN7-20(GND)  
-Настройка DMA:  
-  SPI2_RX    DMA1 Stream 3  Peripheral To Memory  Very High  
-  SPI2_TX    DMA1 Stream 4  Memory To Peripheral  Very High  
-  USART2_RX  DMA1 Stream 5  Peripheral To Memory  Very High  
-  USART2_TX  DMA1 Stream 6  Memory To Peripheral  Very High  
-  MEMTOMEM   DMA2 Stream 0  Memory To Memory      Very High  
-Настройка GPIO:  
-  GPIO_EXIT13  External Interrupt Mode with Faling edge trigger detection  Pull-up  
-    SPI:  
-      (PC2 PC3 PB10) Maximum output speed  Very High  
-Настройка NVIC:  
-  SPI2              global interrupt  0  
-  USART2            global interrupt  0  
-  EXTI line[15:10]  global interrupt  2  
-Настройка RCC:  
-  HSE  Crystal/Ceramic Resonator  
-  LSE  Disable  
-Настройка SYS:  
-  Debug  Serial Wire  
-Настройка TIM2:  
-  Clock Source  Internal Clock  
-Настройка SPI2:  
-  Mode                  Full-Duplex Master  
-  Hardware NSS Signal   Disable  
-    Parameter Settings:  
-      Frame Format      Motorola  
-      Data Size         8 Bits  
-      First Bit         MSB First  
-      Prescaler         2  
-      Clock (CPOL)      Low  
-      Clock (CPHA)      1 Edge  
-      CRC Calculatoin   Disabled  
-      NSS Signal Type   Software  
-Настройка USART2:  
-  Mode                        Asynchronous  
-  HardwareFlowControl(RS232)  Disable  
-    Parameter Settings:  
-      Baud Rate               115200  
-      Word Length             8 Bits  
-      Parity                  None  
-      Stop Bits               1  
-      Data Direction          Receive and Transmit  
-      Over Sampling           16 Samples  
+3. (K9F1G08U0D) NandFlash Board (A):  
+ - D0-D7          PB0-PB7  
+ - FLASH_CE       PA10  
+ - FLASH_WE       PA9  
+ - FLASH_RE       PA8  
+ - FLASH_CLE      PA5  
+ - FLASH_ALE      PA6  
+ - FLASH_RB       PA7  
+ - WP             CN6-4(3V3)  
+ - GND            CN7-20(GND)  
+4. Настройка DMA:  
+ - SPI2_RX    DMA1 Stream 3  Peripheral To Memory  Very High  
+ - SPI2_TX    DMA1 Stream 4  Memory To Peripheral  Very High  
+ - USART2_RX  DMA1 Stream 5  Peripheral To Memory  Very High  
+ - USART2_TX  DMA1 Stream 6  Memory To Peripheral  Very High  
+ - MEMTOMEM   DMA2 Stream 0  Memory To Memory      Very High  
+5. Настройка GPIO:  
+ - GPIO_EXIT13  External Interrupt Mode with Faling edge trigger detection  Pull-up  
+   - SPI:  
+     - (PC2 PC3 PB10) Maximum output speed  Very High  
+6. Настройка NVIC:  
+ - SPI2              global interrupt  0  
+ - USART2            global interrupt  0  
+ - EXTI line[15:10]  global interrupt  2  
+7. Настройка RCC:  
+ - HSE  Crystal/Ceramic Resonator  
+ - LSE  Disable  
+8. Настройка SYS:  
+ - Debug  Serial Wire  
+9. Настройка TIM2:  
+ - Clock Source  Internal Clock  
+10. Настройка SPI2:  
+ - Mode                  Full-Duplex Master  
+ - Hardware NSS Signal   Disable  
+   - Parameter Settings:  
+     - Frame Format      Motorola  
+     - Data Size         8 Bits  
+     - First Bit         MSB First  
+     - Prescaler         2  
+     - Clock (CPOL)      Low  
+     - Clock (CPHA)      1 Edge  
+     - CRC Calculatoin   Disabled  
+     - NSS Signal Type   Software  
+11. Настройка USART2:  
+ - Mode                        Asynchronous  
+ - HardwareFlowControl(RS232)  Disable  
+   - Parameter Settings:  
+     - Baud Rate               115200  
+     - Word Length             8 Bits  
+     - Parity                  None  
+     - Stop Bits               1  
+     - Data Direction          Receive and Transmit  
+     - Over Sampling           16 Samples
+
 Используя связку stm32 + NandFlash + W5500 для модуля W5500 может потребоваться доп. питание.  
