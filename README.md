@@ -52,7 +52,7 @@ Debug  &ensp;Serial Wire
 7. Настройка TIM2:  
 Clock Source  &ensp;Internal Clock  
 7. Настройка SPI2:  
-Mode                  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Full-Duplex Master  
+Mode                  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Full-Duplex Master  
 Hardware NSS Signal   &ensp;&ensp;&ensp;&ensp;&ensp;Disable  
    - Parameter Settings:  
      - Frame Format      &ensp;&ensp;&ensp;&ensp;Motorola  
