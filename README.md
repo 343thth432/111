@@ -30,11 +30,11 @@ SYCLK(MHz) = 84  &ensp;APB Prescaler = 1  &ensp;APB1\APB2 Prescaler = 2  &ensp;H
 ***
 #### Настройка Модулей.  
 1. Настройка DMA:  
- - SPI2_RX    &ensp;&ensp;&ensp;&ensp;&ensp;DMA1 Stream 3  &ensp;&ensp;Peripheral To Memory  &ensp;Very High  
- - SPI2_TX    &ensp;&ensp;&ensp;&ensp;&ensp;DMA1 Stream 4  &ensp;&ensp;Memory To Peripheral  &ensp;Very High  
- - USART2_RX  &ensp;&ensp;DMA1 Stream 5  &ensp;Peripheral To Memory  &ensp;Very High  
- - USART2_TX  &ensp;&ensp;DMA1 Stream 6  &ensp;&ensp;Memory To Peripheral  &ensp;Very High  
- - MEMTOMEM   &ensp;&ensp;DMA2 Stream 0  &ensp;Memory To Memory      &ensp;Very High  
+ - SPI2_RX    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;DMA1 Stream 3  &ensp;&ensp;Peripheral To Memory  &ensp;Very High  
+ - SPI2_TX    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;DMA1 Stream 4  &ensp;&ensp;Memory To Peripheral  &ensp;Very High  
+ - USART2_RX  &ensp;&ensp;&ensp;DMA1 Stream 5  &ensp;&ensp;Peripheral To Memory  &ensp;Very High  
+ - USART2_TX  &ensp;&ensp;&ensp;DMA1 Stream 6  &ensp;&ensp;Memory To Peripheral  &ensp;Very High  
+ - MEMTOMEM   &ensp;&ensp;&ensp;DMA2 Stream 0  &ensp;&ensp;Memory To Memory      &ensp;Very High  
 2. Настройка GPIO:  
  - GPIO_EXIT13  &ensp;External Interrupt Mode with Faling edge trigger detection  &ensp;Pull-up  
    - SPI:  
