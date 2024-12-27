@@ -24,39 +24,39 @@ SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84
   FLASH_RB       PA7  
   WP             CN6-4(3V3)  
   GND            CN7-20(GND)  
-###### Настройка DMA:
-  SPI2_RX    DMA1 Stream 3  Peripheral To Memory  Very High
-  SPI2_TX    DMA1 Stream 4  Memory To Peripheral  Very High
-  USART2_RX  DMA1 Stream 5  Peripheral To Memory  Very High
-  USART2_TX  DMA1 Stream 6  Memory To Peripheral  Very High
-  MEMTOMEM   DMA2 Stream 0  Memory To Memory      Very High
-###### Настройка GPIO:
-  GPIO_EXIT13  External Interrupt Mode with Faling edge trigger detection  Pull-up
-    SPI:
-      (PC2 PC3 PB10) Maximum output speed  Very High
-###### Настройка NVIC:
-  SPI2              global interrupt  0
-  USART2            global interrupt  0
-  EXTI line[15:10]  global interrupt  2
-###### Настройка RCC:
-  HSE  Crystal/Ceramic Resonator
-  LSE  Disable
-###### Настройка SYS:
-  Debug  Serial Wire
-###### Настройка TIM2:
-  Clock Source  Internal Clock
-###### Настройка SPI2:
-  Mode                  Full-Duplex Master
-  Hardware NSS Signal   Disable
-    Parameter Settings:
-      Frame Format      Motorola
-      Data Size         8 Bits
-      First Bit         MSB First
-      Prescaler         2
-      Clock (CPOL)      Low
-      Clock (CPHA)      1 Edge
-      CRC Calculatoin   Disabled
-      NSS Signal Type   Software
+Настройка DMA:  
+  SPI2_RX    DMA1 Stream 3  Peripheral To Memory  Very High  
+  SPI2_TX    DMA1 Stream 4  Memory To Peripheral  Very High  
+  USART2_RX  DMA1 Stream 5  Peripheral To Memory  Very High  
+  USART2_TX  DMA1 Stream 6  Memory To Peripheral  Very High  
+  MEMTOMEM   DMA2 Stream 0  Memory To Memory      Very High  
+Настройка GPIO:  
+  GPIO_EXIT13  External Interrupt Mode with Faling edge trigger detection  Pull-up  
+    SPI:  
+      (PC2 PC3 PB10) Maximum output speed  Very High  
+Настройка NVIC:  
+  SPI2              global interrupt  0  
+  USART2            global interrupt  0  
+  EXTI line[15:10]  global interrupt  2  
+Настройка RCC:  
+  HSE  Crystal/Ceramic Resonator  
+  LSE  Disable  
+Настройка SYS:  
+  Debug  Serial Wire  
+Настройка TIM2:  
+  Clock Source  Internal Clock  
+Настройка SPI2:  
+  Mode                  Full-Duplex Master  
+  Hardware NSS Signal   Disable  
+    Parameter Settings:  
+      Frame Format      Motorola  
+      Data Size         8 Bits  
+      First Bit         MSB First  
+      Prescaler         2  
+      Clock (CPOL)      Low  
+      Clock (CPHA)      1 Edge  
+      CRC Calculatoin   Disabled  
+      NSS Signal Type   Software  
 ###### Настройка USART2:
   Mode                        Asynchronous
   HardwareFlowControl(RS232)  Disable
