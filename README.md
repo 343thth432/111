@@ -7,23 +7,23 @@ SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84
 Кнопка перывания для чтения данных с Nand:  
   GPIO_EXIT13    PC13  
 Сетевой модуль W5500 ТСР/IP (Ethernet):  
-  SPI2_MISO      PC2
-  SPI2_MOSI      PC3
-  SPI2_SCK       PB10
-  W5500_RST      PC7
-  W5500_CS       PC6
-  5V             CN7-16(3V3)
-  GND            CN7-19(GND)
-###### (K9F1G08U0D) NandFlash Board (A):
-  D0-D7          PB0-PB7
-  FLASH_CE       PA10
-  FLASH_WE       PA9
-  FLASH_RE       PA8
-  FLASH_CLE      PA5
-  FLASH_ALE      PA6
-  FLASH_RB       PA7
-  WP             CN6-4(3V3)
-  GND            CN7-20(GND)
+  SPI2_MISO      PC2  
+  SPI2_MOSI      PC3  
+  SPI2_SCK       PB10  
+  W5500_RST      PC7  
+  W5500_CS       PC6  
+  5V             CN7-16(3V3)  
+  GND            CN7-19(GND)  
+(K9F1G08U0D) NandFlash Board (A):  
+  D0-D7          PB0-PB7  
+  FLASH_CE       PA10  
+  FLASH_WE       PA9  
+  FLASH_RE       PA8  
+  FLASH_CLE      PA5  
+  FLASH_ALE      PA6  
+  FLASH_RB       PA7  
+  WP             CN6-4(3V3)  
+  GND            CN7-20(GND)  
 ###### Настройка DMA:
   SPI2_RX    DMA1 Stream 3  Peripheral To Memory  Very High
   SPI2_TX    DMA1 Stream 4  Memory To Peripheral  Very High
