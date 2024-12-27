@@ -18,15 +18,15 @@ SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84
  - 5V             &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN7-16(3V3)  
  - GND            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN7-19(GND)  
 4. (K9F1G08U0D) NandFlash Board (A):  
- - D0-D7          &ensp;PB0-PB7  
- - FLASH_CE       &ensp;PA10  
- - FLASH_WE       &ensp;PA9  
- - FLASH_RE       &ensp;PA8  
+ - D0-D7          &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;PB0-PB7  
+ - FLASH_CE       &ensp;&ensp;PA10  
+ - FLASH_WE       &ensp;&ensp;PA9  
+ - FLASH_RE       &ensp;&ensp;PA8  
  - FLASH_CLE      &ensp;PA5  
  - FLASH_ALE      &ensp;PA6  
- - FLASH_RB       &ensp;PA7  
- - WP             &ensp;CN6-4(3V3)  
- - GND            &ensp;CN7-20(GND)
+ - FLASH_RB       &ensp;&ensp;&ensp;PA7  
+ - WP             &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN6-4(3V3)  
+ - GND            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN7-20(GND)
 ***
 ##### Настройка Модулей.  
 1. Настройка DMA:  
