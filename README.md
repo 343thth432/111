@@ -45,10 +45,10 @@ SPI2              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&e
 USART2            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;global interrupt  &ensp;0  
 EXTI line[15:10]  &ensp;&ensp;global interrupt  &ensp;2  
 4. Настройка RCC:  
-HSE  &ensp;Crystal/Ceramic Resonator  
-LSE  &ensp;Disable  
+HSE  &ensp;&ensp;&ensp;&ensp;&ensp;Crystal/Ceramic Resonator  
+LSE  &ensp;&ensp;&ensp;&ensp;&ensp;Disable  
 5. Настройка SYS:  
-Debug  &ensp;Serial Wire  
+Debug  &ensp;&ensp;&ensp;Serial Wire  
 7. Настройка TIM2:  
 Clock Source  &ensp;Internal Clock  
 7. Настройка SPI2:  
