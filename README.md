@@ -5,9 +5,9 @@ TCP сервер на stm32f401re nucleo c сетевым модулем W5500 �
 ##### Настойка пинов и тактирование.  
 SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84  
 1. Отладка USART+DMA:  
- - &ensp;USART2_TX      PA2  
- - USART2_RX      PA3  
-2. Кнопка перывания для чтения данных с Nand:  
+&ensp;USART2_TX      &ensp;PA2  
+&ensp;USART2_RX      &ensp;PA3  
+3. Кнопка перывания для чтения данных с Nand:  
  - GPIO_EXIT13    PC13  
 3. Сетевой модуль W5500 ТСР/IP (Ethernet):  
  - SPI2_MISO      PC2  
