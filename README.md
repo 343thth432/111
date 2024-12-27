@@ -14,7 +14,7 @@ SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84
  - SPI2_MOSI      &ensp;&ensp;PC3  
  - SPI2_SCK       &ensp;&ensp;&ensp;PB10  
  - W5500_RST      &ensp;PC7  
- - W5500_CS       &ensp;&ensp;&ensp;PC6  
+ - W5500_CS      &ensp;&ensp;&ensp;PC6  
  - 5V             &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN7-16(3V3)  
  - GND            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN7-19(GND)  
 4. (K9F1G08U0D) NandFlash Board (A):  
