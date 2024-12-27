@@ -64,8 +64,8 @@ Hardware NSS Signal   &ensp;Disable
      - CRC Calculatoin   &ensp;Disabled  
      - NSS Signal Type   &ensp;Software  
 8. Настройка USART2:  
- - Mode                        &ensp;Asynchronous  
- - HardwareFlowControl(RS232)  &ensp;Disable  
+Mode                        &ensp;Asynchronous  
+HardwareFlowControl(RS232)  &ensp;Disable  
    - Parameter Settings:  
      - Baud Rate               &ensp;115200  
      - Word Length             &ensp;8 Bits  
