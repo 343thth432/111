@@ -71,8 +71,8 @@ HardwareFlowControl(RS232)  &ensp;Disable
      - Word Length             &ensp;8 Bits  
      - Parity                  &ensp;None  
      - Stop Bits               &ensp;1  
-     - Data Direction          &ensp;Receive and Transmit  
-     - Over Sampling           &ensp;16 Samples
+     - Data Direction          &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Receive and Transmit  
+     - Over Sampling           &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;16 Samples
 ***
 Используя связку stm32 + NandFlash + W5500 для модуля W5500 может потребоваться доп. питание.  
 ***
