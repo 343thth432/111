@@ -5,7 +5,7 @@ SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84
  - USART2_TX      PA2  
  - USART2_RX      PA3  
 Кнопка перывания для чтения данных с Nand:  
-  GPIO_EXIT13    PC13  
+ - GPIO_EXIT13    PC13  
 Сетевой модуль W5500 ТСР/IP (Ethernet):  
   SPI2_MISO      PC2  
   SPI2_MOSI      PC3  
