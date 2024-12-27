@@ -42,7 +42,7 @@ GPIO_EXIT13  &ensp;&ensp;External Interrupt Mode with Faling edge trigger detect
 SPI:&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Maximum output speed  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Very High  
 3. Настройка NVIC:  
 SPI2              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;global interrupt  &ensp;0  
-USART2            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;global interrupt  &ensp;0  
+USART2            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;global interrupt  &ensp;0  
 EXTI line[15:10]  &ensp;global interrupt  &ensp;2  
 4. Настройка RCC:  
 HSE  &ensp;Crystal/Ceramic Resonator  
