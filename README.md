@@ -57,14 +57,14 @@ SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84
       Clock (CPHA)      1 Edge  
       CRC Calculatoin   Disabled  
       NSS Signal Type   Software  
-###### Настройка USART2:
-  Mode                        Asynchronous
-  HardwareFlowControl(RS232)  Disable
-    Parameter Settings:
-      Baud Rate               115200
-      Word Length             8 Bits
-      Parity                  None
-      Stop Bits               1
-      Data Direction          Receive and Transmit
-      Over Sampling           16 Samples
-###### Используя связку stm32 + NandFlash + W5500 для модуля W5500 может потребоваться доп. питание.
+Настройка USART2:  
+  Mode                        Asynchronous  
+  HardwareFlowControl(RS232)  Disable  
+    Parameter Settings:  
+      Baud Rate               115200  
+      Word Length             8 Bits  
+      Parity                  None  
+      Stop Bits               1  
+      Data Direction          Receive and Transmit  
+      Over Sampling           16 Samples  
+Используя связку stm32 + NandFlash + W5500 для модуля W5500 может потребоваться доп. питание.  
