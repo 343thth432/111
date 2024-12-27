@@ -41,9 +41,9 @@ MEMTOMEM   &ensp;&ensp;&ensp;DMA2 Stream 0  &ensp;&ensp;Memory To Memory      &e
 GPIO_EXIT13  &ensp;&ensp;External Interrupt Mode with Faling edge trigger detection  &ensp;Pull-up  
 SPI:&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Maximum output speed  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Very High  
 3. Настройка NVIC:  
-SPI2              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;global interrupt  &ensp;0  
+SPI2              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;global interrupt  &ensp;0  
 USART2            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;global interrupt  &ensp;0  
-EXTI line[15:10]  &ensp;global interrupt  &ensp;2  
+EXTI line[15:10]  &ensp;&ensp;global interrupt  &ensp;2  
 4. Настройка RCC:  
 HSE  &ensp;Crystal/Ceramic Resonator  
 LSE  &ensp;Disable  
