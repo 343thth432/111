@@ -45,7 +45,7 @@ SPI2              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&e
 USART2            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;global interrupt  &ensp;0  
 EXTI line[15:10]  &ensp;&ensp;global interrupt  &ensp;2  
 4. Настройка RCC:  
-HSE  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Crystal/Ceramic Resonator  
+HSE  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Crystal/Ceramic Resonator  
 LSE  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Disable  
 5. Настройка SYS:  
 Debug  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Serial Wire  
