@@ -74,5 +74,5 @@ HardwareFlowControl(RS232)  &ensp;Disable
      - Data Direction          &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Receive and Transmit  
      - Over Sampling           &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;16 Samples
 ***
-Используя связку stm32 + NandFlash + W5500 для модуля W5500 может потребоваться доп. питание.  
+Используя связку stm32f401re nucleo + NandFlash + W5500 для модуля W5500 может потребоваться доп. питание.  
 ***
