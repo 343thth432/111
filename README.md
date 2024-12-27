@@ -67,11 +67,11 @@ Hardware NSS Signal   &ensp;&ensp;&ensp;&ensp;&ensp;Disable
 Mode                        &ensp;Asynchronous  
 HardwareFlowControl(RS232)  &ensp;Disable  
    - Parameter Settings:  
-     - Baud Rate               &ensp;115200  
-     - Word Length             &ensp;8 Bits  
-     - Parity                  &ensp;None  
-     - Stop Bits               &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;1  
-     - Data Direction          &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Receive and Transmit  
+     - Baud Rate               &ensp;&ensp;&ensp;&ensp;115200  
+     - Word Length             &ensp;&ensp;&ensp;&ensp;8 Bits  
+     - Parity                  &ensp;&ensp;&ensp;&ensp;&ensp;None  
+     - Stop Bits               &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;1  
+     - Data Direction          &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Receive and Transmit  
      - Over Sampling           &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;16 Samples
 ***
 Используя связку stm32 + NandFlash + W5500 для модуля W5500 может потребоваться доп. питание.  
