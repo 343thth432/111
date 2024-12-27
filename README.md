@@ -52,17 +52,17 @@ Debug  &ensp;Serial Wire
 7. Настройка TIM2:  
 Clock Source  &ensp;Internal Clock  
 7. Настройка SPI2:  
-Mode                  &ensp;Full-Duplex Master  
-Hardware NSS Signal   &ensp;Disable  
+Mode                  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Full-Duplex Master  
+Hardware NSS Signal   &ensp;&ensp;&ensp;&ensp;&ensp;Disable  
    - Parameter Settings:  
-     - Frame Format      &ensp;&ensp;&ensp;Motorola  
-     - Data Size         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;8 Bits  
-     - First Bit         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;MSB First  
-     - Prescaler         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2  
-     - Clock (CPOL)      &ensp;&ensp;&ensp;Low  
-     - Clock (CPHA)      &ensp;&ensp;&ensp;1 Edge  
-     - CRC Calculatoin   &ensp;Disabled  
-     - NSS Signal Type   &ensp;Software  
+     - Frame Format      &ensp;&ensp;&ensp;&ensp;Motorola  
+     - Data Size         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;8 Bits  
+     - First Bit         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;MSB First  
+     - Prescaler         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2  
+     - Clock (CPOL)      &ensp;&ensp;&ensp;&ensp;Low  
+     - Clock (CPHA)      &ensp;&ensp;&ensp;&ensp;1 Edge  
+     - CRC Calculatoin   &ensp;&ensp;Disabled  
+     - NSS Signal Type   &ensp;&ensp;Software  
 8. Настройка USART2:  
 Mode                        &ensp;Asynchronous  
 HardwareFlowControl(RS232)  &ensp;Disable  
