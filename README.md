@@ -2,9 +2,12 @@
 TCP сервер на сетевом модуле W5500 по SPI DMA бесконечно передает данные на скорости 5.5Мбит, и записывает их на NANDFlash память. По нажатию кнопки отправка и запись прерывается и производится чтение всей NAND памяти.
 
 SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84
-###### Отладка USART+DMA:
-  - USART2_TX      PA2
-  - USART2_RX      PA3
+Отладка USART+DMA:
+
+  USART2_TX      PA2
+
+  USART2_RX      PA3
+
 ###### Кнопка перывания для чтения данных с Nand:
   GPIO_EXIT13    PC13
 ###### Сетевой модуль W5500 ТСР/IP (Ethernet):
