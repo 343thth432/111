@@ -3,7 +3,7 @@
 TCP сервер на stm32f401re nucleo c сетевым модулем W5500 по SPI DMA бесконечно передает данные на скорости 5.5Мбит, и записывает их на NANDFlash память (без FSMC)(3.4Мбит). По нажатию кнопки отправка и запись прерывается и производится чтение всей NAND памяти.
 ***
 #### Настойка пинов и тактирование.  
-SYCLK(MHz) = 84  &ensp;APB Prescaler = 1  &ensp;APB1\APB2 Prescaler = 2  &ensp;HCLK(MHz) = 84  
+SYCLK(MHz) = 84  &ensp;HCLK(MHz) = 84  
 1. Отладка USART+DMA:  
 USART2_TX      &ensp;PA2  
 USART2_RX      &ensp;PA3  
@@ -24,7 +24,7 @@ FLASH_WE       &ensp;&ensp;PA9
 FLASH_RE       &ensp;&ensp;PA8  
 FLASH_CLE      &ensp;PA5  
 FLASH_ALE      &ensp;PA6  
-FLASH_RB       &ensp;&ensp;PA7
+FLASH_RB       &ensp;&ensp;PA7  
 WP             &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN6-4(3V3)  
 GND            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN7-20(GND)
 ***
