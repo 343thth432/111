@@ -1,9 +1,9 @@
 ### W5500 TCPS SPI+DMA STM32F401RE-NUCLEO NAND K9F1G08U0D.
 ##### TCP сервер на сетевом модуле W5500 по SPI DMA бесконечно передает данные на скорости 5.5Мбит, и записывает их на NANDFlash память. По нажатию кнопки отправка и запись прерывается и производится чтение всей NAND памяти.
-##### SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84
-Отладка USART+DMA:
-  USART2_TX      PA2
-  USART2_RX      PA3
+###### SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84
+###### Отладка USART+DMA:
+  - USART2_TX      PA2
+  - USART2_RX      PA3
 Кнопка перывания для чтения данных с Nand:
   GPIO_EXIT13    PC13
 Сетевой модуль W5500 ТСР/IP (Ethernet):
@@ -67,4 +67,4 @@
       Stop Bits               1
       Data Direction          Receive and Transmit
       Over Sampling           16 Samples
-Используя связку stm32 + NandFlash + W5500 для модуля W5500 может потребоваться доп. питание.
+###### Используя связку stm32 + NandFlash + W5500 для модуля W5500 может потребоваться доп. питание.
