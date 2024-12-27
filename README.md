@@ -1,6 +1,6 @@
 #### W5500 TCPS SPI+DMA STM32F401RE-NUCLEO NAND K9F1G08U0D.  
 TCP сервер на stm32f401re nucleo c сетевым модулем W5500 по SPI DMA бесконечно передает данные на скорости 5.5Мбит, и записывает их на NANDFlash память (без FSMC)(3.4Мбит). По нажатию кнопки отправка и запись прерывается и производится чтение всей NAND памяти.
-
+***
 ##### Настойка пинов и тактирование.  
 SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84  
 1. Отладка USART+DMA:  
