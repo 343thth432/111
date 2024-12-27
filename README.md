@@ -56,8 +56,8 @@ Mode                  &ensp;Full-Duplex Master
 Hardware NSS Signal   &ensp;Disable  
    - Parameter Settings:  
      - Frame Format      &ensp;&ensp;&ensp;Motorola  
-     - Data Size         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;8 Bits  
-     - First Bit         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;MSB First  
+     - Data Size         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;8 Bits  
+     - First Bit         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;MSB First  
      - Prescaler         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2  
      - Clock (CPOL)      &ensp;&ensp;&ensp;Low  
      - Clock (CPHA)      &ensp;&ensp;&ensp;1 Edge  
