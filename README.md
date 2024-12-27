@@ -2,7 +2,7 @@
 #### W5500 TCPS SPI+DMA STM32F401RE-NUCLEO NAND K9F1G08U0D.  
 TCP сервер на stm32f401re nucleo c сетевым модулем W5500 по SPI DMA бесконечно передает данные на скорости 5.5Мбит, и записывает их на NANDFlash память (без FSMC)(3.4Мбит). По нажатию кнопки отправка и запись прерывается и производится чтение всей NAND памяти.
 ***
-#### Настойка пинов и тактирование. 
+### Настойка пинов и тактирование. 
 1. Тактирование:  
 SYCLK(MHz) = 84  
 HCLK(MHz) = 84  
@@ -30,17 +30,17 @@ FLASH_RB       &ensp;&ensp;PA7
 WP             &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN6-4(3V3)  
 GND            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN7-20(GND)
 ***
-#### Настройка Модулей.  
+### Настройка Модулей.  
 1. Настройка DMA:  
- - SPI2_RX    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;DMA1 Stream 3  &ensp;&ensp;Peripheral To Memory  &ensp;&ensp;Very High  
- - SPI2_TX    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;DMA1 Stream 4  &ensp;&ensp;Memory To Peripheral  &ensp;&ensp;Very High  
- - USART2_RX  &ensp;&ensp;&ensp;DMA1 Stream 5  &ensp;&ensp;Peripheral To Memory  &ensp;&ensp;Very High  
- - USART2_TX  &ensp;&ensp;&ensp;DMA1 Stream 6  &ensp;&ensp;Memory To Peripheral  &ensp;&ensp;Very High  
- - MEMTOMEM   &ensp;&ensp;&ensp;DMA2 Stream 0  &ensp;&ensp;Memory To Memory      &ensp;&ensp;&ensp;Very High  
+SPI2_RX    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;DMA1 Stream 3  &ensp;&ensp;Peripheral To Memory  &ensp;&ensp;Very High  
+SPI2_TX    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;DMA1 Stream 4  &ensp;&ensp;Memory To Peripheral  &ensp;&ensp;Very High  
+USART2_RX  &ensp;&ensp;&ensp;DMA1 Stream 5  &ensp;&ensp;Peripheral To Memory  &ensp;&ensp;Very High  
+USART2_TX  &ensp;&ensp;&ensp;DMA1 Stream 6  &ensp;&ensp;Memory To Peripheral  &ensp;&ensp;Very High  
+MEMTOMEM   &ensp;&ensp;&ensp;DMA2 Stream 0  &ensp;&ensp;Memory To Memory      &ensp;&ensp;&ensp;Very High  
 2. Настройка GPIO:  
- - GPIO_EXIT13  &ensp;External Interrupt Mode with Faling edge trigger detection  &ensp;Pull-up  
-   - SPI:  
-     - (PC2 &ensp;PC3 &ensp;PB10) &ensp;Maximum output speed  &ensp;Very High  
+GPIO_EXIT13  &ensp;External Interrupt Mode with Faling edge trigger detection  &ensp;Pull-up  
+   SPI:  
+     (PC2 &ensp;PC3 &ensp;PB10) &ensp;Maximum output speed  &ensp;Very High  
 3. Настройка NVIC:  
  - SPI2              &ensp;global interrupt  &ensp;0  
  - USART2            &ensp;global interrupt  &ensp;0  
