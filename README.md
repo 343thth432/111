@@ -12,7 +12,7 @@ SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84
 3. Сетевой модуль W5500 ТСР/IP (Ethernet):  
  - SPI2_MISO      &ensp;PC2  
  - SPI2_MOSI      &ensp;PC3  
- - SPI2_SCK       &ensp;PB10  
+ - SPI2_SCK       &ensp;&ensp;PB10  
  - W5500_RST      &ensp;PC7  
  - W5500_CS       &ensp;PC6  
  - 5V             &ensp;CN7-16(3V3)  
