@@ -25,7 +25,7 @@ SYCLK(MHz) = 84  APB Prescaler = 1  APB1\APB2 Prescaler = 2  HCLK(MHz) = 84
  - FLASH_CLE      &ensp;PA5  
  - FLASH_ALE      &ensp;PA6  
  - FLASH_RB       &ensp;&ensp;PA7  
- - WP             &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN6-4(3V3)  
+ - WP             &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN6-4(3V3)  
  - GND            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;CN7-20(GND)
 ***
 ##### Настройка Модулей.  
